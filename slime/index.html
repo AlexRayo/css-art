@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <!-- <form action="">
+        <input type="text" id="dniNumber" onchange="validate(this.value)">
+    </form> -->
+    
+</body>
+<script>
+// Comprueba si es un DNI correcto (entre 5 y 8 letras seguidas de la letra que corresponda).
+
+// Acepta NIEs (Extranjeros con X, Y o Z al principio)
+//var dniNumber = document.getElementById("dniNumber").value;
+//document.getElementById("submit").onclick().preventDefault();
+function validate(value){
+    console.log(value)
+    validateDNI(value)
+}
+function validateDNI(dni) {
+    var numero
+    var letr
+    var letra
+    var expresion_regular_dni
+    
+    expresion_regular_dni = /^\d{8}[a-zA-Z]$/;
+    
+    if(expresion_regular_dni.test (dni) == true){
+        numero = dni.substr(0,dni.length-1);
+        letr = dni.substr(dni.length-1,1);
+        numero = numero % 23;
+        letra='TRWAGMYFPDXBNJZSQVHLCKET';
+        letra=letra.substring(numero,numero+1);
+        if (letra!=letr.toUpperCase()) {
+        console.log('Dni erroneo, la letra del NIF no se corresponde');
+        }else{
+        console.log('Dni correcto');
+        }
+    }else{
+        console.log('Dni erroneo, formato no válido');
+    }
+    }
+</script>
+</html>

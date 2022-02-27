@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --dark: hsl(237, 53%, 7%);
+    --white: #f1f1f1;
+}
+body {
+    background: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 350px;
+    overflow: hidden;
+}
+.head {
+    background: var(--white); 
+    border-radius: 50% 50% 50% 50% / 40% 40% 70% 70%;
+    width: 300px; height: 450px;
+    /* overflow: hidden; */
+    position: relative;
+}
+
+.head::before, .head::after, .eye::before, .eye:after, .line::after, .line::before, .line2:after, .line::before, .line3:after, .line3::before {
+    content: "";
+    position: absolute;
+}
+.head::before {
+    width: 20px; height: 20px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 68%, rgba(20,21,43, 0.3) 100%);
+    border-radius: 50%;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 70% 70%;
+    width: 300px; height: 450px;
+    z-index: 9;    
+    /*on the oursite to hide overflowing(using overflow hice on container creates an annoying border)*/
+    box-shadow: 20px 20px 0 350px var(--dark);
+}
+/*teeth*/
+.head::after {
+    width: 30px;
+    height: 60px;
+    background: var(--white);
+    bottom: 120px;
+    border-radius: 100% 0 100% 0;
+    left: 0px;
+    transform: rotate(-25deg);    
+    box-shadow: 
+    15px 20px 0 0 var(--dark),
+    20px 40px 0 0 var(--dark),
+    30px 60px 0 0 var(--dark),
+    40px 80px 0 0 var(--dark),
+    50px 100px 0 0 var(--dark),
+    67px 112px 0 0 var(--dark),
+    83px 125px 0 0 var(--dark),
+    100px 135px 0 0 var(--dark),
+    122px 130px 0 0 var(--dark),
+    144px 130px 0 0 var(--dark),
+    164px 130px 0 0 var(--dark),
+    185px 130px 0 0 var(--dark),
+    205px 130px 0 0 var(--dark),
+    230px 150px 0 18px var(--dark);
+}
+
+
+.eye {
+    position: relative;
+    width: 100px; height: 45px;
+    background: linear-gradient(100deg, var(--dark) 68%, rgb(0,0,0) 100%);
+    top: 180px;
+    border-radius: 50px 0px 50px 0;
+    left: 195px;
+    transform: rotate(-15deg);
+     box-shadow:
+    55px -20px 0px -20px var(--dark),
+    8px 50px 0px -15px crimson,
+    20px 70px 0px -17px crimson,
+    /* head shadows */
+    -20px -230px 0px 10px var(--dark),
+    -140px -190px 0px 20px var(--dark),
+    -120px -120px 0px 20px var(--dark),
+    -160px -35px 0px 45px var(--dark),
+    -175px 65px 0px 15px var(--dark),
+    -90px 185px 0px 25px var(--dark);
+    z-index: 2;
+
+}
+.eye::before{
+    width: 20px; height: 20px;
+    background: rgb(33,33,33);
+    background: radial-gradient(circle, rgba(33,33,33,1) 21%, rgba(245,160,0,1) 25%, rgba(245,160,0,1) 40%, rgb(245, 130, 0) 50%); 
+    border-radius: 50%;
+    bottom: 15px;
+    left: 30px;
+}
+
+/* shadow inside head */
+.eye:after {
+    width: 200px; height: 450px;
+    background: var(--dark);
+    top: -200px;
+    border-radius: 0px 50px 50px 50px;
+    transform: rotate(10deg);
+    left: -275px;
+    z-index: 2;
+    /* box-shadow: 20px -10px 0 0 rgb(255, 196, 0); */
+}
+.line {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-left: solid 50px crimson;
+    border-radius: 100% 0 0 100%;
+    color: transparent;
+    background: currentColor;
+    transform: rotate(80deg);   
+    top: -50px;
+    left: 150px; 
+    
+}
+.line::before {
+    width: 500px;
+    height: 500px;
+    border-left: solid 50px crimson;
+    border-radius: 100% 0 0 100%;
+    color: transparent;
+    background: currentColor;
+    transform: rotate(20deg);   
+    top: 30px;
+    left: 10px;    
+}
+.line::after {
+    width: 500px;
+    height: 500px;
+    border-left: solid 50px crimson;
+    border-radius: 100% 0 0 100%;
+    color: transparent;
+    background: currentColor;
+    transform: rotate(40deg);   
+    top: 70px;
+    left: 70px;    
+}
+

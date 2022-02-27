@@ -1,0 +1,302 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --dark: hsl(237, 53%, 7%);
+    --white: #f1f1f1;
+    --blueGlown: rgb(72, 150, 238);
+    /**/
+    --flyingSpeed: 0.3s;
+    /**/
+    --particleSize: 4px;
+    --particleSpeed: 1s;
+    --particleDelay: 0.5s;
+    --particleBlur: 5px;
+    /**/    
+    --glownParticleSize: 10px;
+    --glownParticleSpeed: 0.25s;
+}
+body {
+    background: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 350px;
+    overflow: hidden;
+}
+.navi {
+    background: var(--white); 
+    border-radius: 50%;
+    width: 50px; height: 50px;
+    /* overflow: hidden; */
+    position: relative;
+    box-shadow: 0 0 15px 2px var(--white),
+    0 0 20px 5px var(--blueGlown);
+    animation: animation-navi var(--flyingSpeed) ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+.navi::before, .navi::after, .wing::before, .wing::after, .wing-bottom:before, .wing-bottom:after, .particles::before, .particles::after{
+    content: "";
+    position: absolute;
+}
+
+/* navi inside */
+.navi::after{
+    border-radius: 50%;
+    width: 50px; height: 50px;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow:
+    0 0 25px 0px var(--blueGlown),
+    0 0 5px 0px var(--white),    
+    inset 0 0 10px 3px var(--blueGlown), 
+    0 0 150px 35px var(--blueGlown);
+    top: 0px;
+    left: 0px;
+}
+/* TOP RIGHT WING */
+.wing:before {
+    background: var(--white);
+    width: 100px;
+    height: 50px;
+    top: 5px;
+    left: 40px;
+    border-radius: 0px 50px 50px 170%;
+    transform: rotateZ(-45deg) rotateX(40deg);
+    transform-origin:  0 0;
+    transform-style: preserve-3d;
+    animation: animation-Rwing var(--flyingSpeed) ease-in-out infinite;
+    box-shadow: 0 0 20px 0 var(--blueGlown);
+}
+/* TOP LEFT WING */
+.wing:after {
+    background: var(--white);
+    width: 100px;
+    height: 50px;
+    top: 5px;
+    left: -90px;
+    border-radius: 50px 0px 170% 50px;
+    transform: rotate(30deg) rotateX(40deg);
+    transform-origin:  100% 0;
+    transform-style: preserve-3d;
+    animation: animation-Lwing var(--flyingSpeed) ease-in-out infinite;
+    box-shadow: 0 0 20px 0 var(--blueGlown);
+}
+.wing-bottom:before,.wing-bottom:after{    
+    position: absolute;
+    background: var(--white);
+    width: 50px;
+    height: 25px;
+    top: 35px;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 20px 0 var(--blueGlown);
+}
+/* BOTTOM RIGHT WING */
+.wing-bottom:before{
+    left: 45px;
+    border-radius: 0px 25px 25px 170%;
+    transform-origin:  0 0;
+    animation: animation-BRwing var(--flyingSpeed) ease-in-out infinite;
+    box-shadow: 0 0 20px 0 var(--blueGlown);
+}
+/* BOTTOM LEFT WING */
+.wing-bottom:after{
+    left: -46px;
+    border-radius: 25px 0px 170% 25px;    
+    transform-origin:  100% 0;
+    animation: animation-BLwing var(--flyingSpeed) ease-in-out infinite;
+}
+.particles {
+    position: relative;
+    top: 23px;
+    left: 23px;
+    transform: rotate(40deg);
+}
+.particles, .particles::before, .particles::after, .navi::before {
+    width: var(--particleSize); 
+    height: var(--particleSize);
+    border-radius: 50%;
+}
+/*fireglown*/
+.navi::before {
+    animation: animation-fireglown var(--glownParticleSpeed) ease-in-out infinite;
+    transform: rotate(40deg);
+    top: 25px;
+    left: 25px;
+}
+.particles::before, .particles::after {
+    animation: animation-particles var(--particleSpeed) ease-in-out infinite;
+} 
+.particles::after {
+    animation: animation-particles var(--particleSpeed) ease-in-out infinite;
+    animation-delay: var(--particleDelay);
+} 
+
+@keyframes animation-navi {
+    0% {
+        transform: translateY(0) rotatey(0deg);
+    }
+    50% {
+        transform: translateY(10px) rotatey(0deg);
+    }
+    100% {
+        transform: translateY(0) rotatey(0deg);
+    }
+  }
+
+@keyframes animation-Lwing {
+    0% {
+        transform: rotateZ(65deg) rotateX(60deg);
+    }
+    50% {
+        transform: rotateZ(0deg) rotateX(60deg);
+    }
+    100% {
+        transform: rotateZ(65deg) rotateX(60deg);
+    }
+  }
+
+  @keyframes animation-Rwing {
+    0% {
+        transform: rotateZ(-65deg) rotateX(60deg);
+    }
+    50% {
+        transform: rotateZ(0deg) rotateX(60deg);
+    }
+    100% {
+        transform: rotateZ(-65deg) rotateX(60deg);
+    }
+  }
+
+  @keyframes animation-BRwing {
+    0% {
+        transform: rotatez(25deg) rotatex(60deg);
+    }
+    50% {
+        transform: rotatez(55deg) rotatex(60deg);
+    }
+    100% {
+        transform: rotatez(25deg) rotatex(60deg);
+    }
+  }
+  @keyframes animation-BLwing {
+    0% {
+        transform: rotatez(-45deg) rotatex(-60deg);
+    }
+    50% {
+        transform: rotatez(-65deg) rotatex(-60deg);
+    }
+    100% {
+        transform: rotatez(-45deg) rotatex(-60deg);
+    }
+  }
+  @keyframes animation-fireglown {
+    0% {
+        box-shadow: 
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white)
+
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white)
+    ;
+    opacity: 1;
+    }
+
+    100% {
+        box-shadow:        
+    -100px -100px 25px var(--glownParticleSize) var(--white),
+    -50px -100px 25px var(--glownParticleSize) var(--white),
+    0px -100px 25px var(--glownParticleSize) var(--white),
+    50px -100px 25px var(--glownParticleSize) var(--white),
+    100px -100px 25px var(--glownParticleSize) var(--white),
+
+    100px -50px 25px var(--glownParticleSize) var(--white),
+    100px 0px 25px var(--glownParticleSize) var(--white),
+    100px 50px 25px var(--glownParticleSize) var(--white),
+
+    100px 100px 25px var(--glownParticleSize) var(--white),
+    50px 100px 25px var(--glownParticleSize) var(--white),
+    0px 100px 25px var(--glownParticleSize) var(--white),
+    -50px 100px 25px var(--glownParticleSize) var(--white),
+    -100px 100px 25px var(--glownParticleSize) var(--white),
+
+    -100px 50px 25px var(--glownParticleSize) var(--white),
+    -100px 0px 25px var(--glownParticleSize) var(--white),
+    -100px -50px 25px var(--glownParticleSize) var(--white)
+    ;
+    opacity: 0;
+    }
+  }
+  @keyframes animation-particles {
+    0% {
+        box-shadow: 
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white),
+    0px 0px 1px 0 var(--white)
+    ;
+    opacity: 1;
+    }
+
+    100% {
+        box-shadow:        
+        -100px -100px var(--particleBlur) 0px var(--white),
+        -50px -100px var(--particleBlur) 0px var(--white),
+        0px -100px var(--particleBlur) 0px var(--white),
+        50px -100px var(--particleBlur) 0px var(--white),
+        100px -100px var(--particleBlur) 0px var(--white),
+      
+        100px -50px var(--particleBlur) 0px var(--white),
+        100px 0px var(--particleBlur) 0px var(--white),
+        100px 50px var(--particleBlur) 0px var(--white),
+      
+        100px 100px var(--particleBlur) 0px var(--white),
+        50px 100px var(--particleBlur) 0px var(--white),
+        0px 100px var(--particleBlur) 0px var(--white),
+        -50px 100px var(--particleBlur) 0px var(--white),
+        -100px 100px var(--particleBlur) 0px var(--white),
+      
+        -100px 50px var(--particleBlur) 0px var(--white),
+        -100px 0px var(--particleBlur) 0px var(--white),
+        -100px -50px var(--particleBlur) 0px var(--white)
+    ;
+    opacity: 0;
+    }
+  }
